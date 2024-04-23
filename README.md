@@ -22,7 +22,7 @@ Para fazer o download do Certificado CA, poderemos executar o comando a seguir.
 ```bash
 openssl s_client -connect SITELOCAL.ovirt:443 -showcerts
 ```
-O segundo certificado é a CA que deverá ser copiado para dentro do ficheiro ca.pem e salvar na raiz do projeto
+O segundo certificado é a CA que deverá ser copiado para dentro do novo arquivo ca.pem e salvar na raiz do projeto
 
 ### 2- Criando arquivo de environment
 
