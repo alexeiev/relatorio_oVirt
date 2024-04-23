@@ -50,12 +50,18 @@ no diretório com o mesmo nome, será perguntado se é para substituir ou poder�
 para o novo arquivo.
 
 Existe uma variável no script que poderá ser modificada para filtrar as maquinas que serão listadas no relatório.
-**vms = vms_service.list(search='name=ultvvi6*', max=30)**
-Pode usar o parâmetro max=<int>, para indicar um número máximo de resultados
-Pede usar o parâmetro search=<str> , para indicar uma pesquisa de nomes para o relatório.
+
+```bash
+vms = vms_service.list(search='name=srv-app*', max=30)
+```
+
+Pode usar o parâmetro **max=\<int>**, para indicar um número máximo de resultados
+Pede usar o parâmetro **search=\<str>** , para indicar uma pesquisa de nomes para o relatório.
 
 Para um relatório completo, não passar parâmetro nesta variável, deixando da seguinte forma:
-**vms = vms_service.list()**
+```bash
+vms = vms_service.list()
+```
 
 
 **Link de Referência**
