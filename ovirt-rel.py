@@ -1,14 +1,10 @@
 #!/usr/bin/env python3.6
 '''
 Definições:
-necessario gerar relatório das vms hospedadas nos dois clusters oVirt
+necessario gerar relatório das vms hospedadas nos clusters oVirt
 e devem conter a seguinte informação:
 
 Nome; CPU; RAM; OS; DISCO
-
-
-Ref.: https://www.ovirt.org/documentation/doc-Python_SDK_Guide/#Installing_the_Software_Development_Kit
-
 '''
 import sys
 import os
@@ -19,21 +15,24 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-## Validando as variáveis no ficheiro .env
+## Validando as variáveis no arquivo .env
 try: 
     USERNAME = os.environ["USERNAME"]
     PASSWORD = os.environ["PASSWORD"]
     SITE     = os.environ["SITE"]
     FILE     = os.environ["FILE"]
 except:
-    print(f"[ERROR]: Validar ficheiro com as variáveis")
+    print(f"[ERROR]: Validar arquivo com as variáveis")
     sys.exit(1)
 
 if os.path.isfile(FILE):
-    print(f"O ficheiro {FILE} já existe na diretoria local")
-    sN = input("Deseja sobrescrever? [sN] ")
-    if sN.upper() == "N":
-        FILE = input("Digite o nome do fichero: ")
+    print(f"O arquivo {FILE} já existe no diretório local")
+    sN = input("Deseja sobrescrever? [s/N] ")
+    if sN.upper() == "N" or not sN:
+        FILE = input("Digite o nome do arquivo: ")
+        if len(FILE.split()) > 1:
+            print("O nome do arquivo não pode conter espaços.")
+            sys.exit(1)
 
 
 #Criando conexão com o oVirt
@@ -69,7 +68,7 @@ with open(FILE, 'w') as csvfile:
         disk_attachments = vm_service.disk_attachments_service().list()
         disk_size = 0
         for disk in disk_attachments:
-            #print(f"[DEBUG] - Nome: {disk}")
+            #Validando e fazendo soma dos discos.
             disk = connection.follow_link(disk.disk)
             if disk.provisioned_size is not None:
                 disk_size += disk.provisioned_size
