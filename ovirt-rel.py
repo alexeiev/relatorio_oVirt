@@ -51,7 +51,7 @@ vms_service = connection.system_service().vms_service()
 
 #buscando lista de vms
 vms = vms_service.list()
-#vms = vms_service.list(search='name=ultvvi6*', max=30)
+#vms = vms_service.list(search='name=srv-app1*', max=30)
 
 
 count_vms = 0
