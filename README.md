@@ -11,7 +11,15 @@ Foi utilizada as seguintes informações como base para a coleta:
 
 ## Requirements
 Foi utilizado o Alma Linux 8 com python3.6.
-Vamos instalar o repositório do oVirt e suas dependências
+Vamos fazer um clone do repositório com o comando:
+**OBS.: Caso não tenha o git instalado, instale o pacote antes**
+ ```bash
+ sudo dnf install -y git
+ git clone https://github.com/alexeiev/relatorio_oVirt.git
+ cd relatorio_oVirt
+ ```
+
+Vamos instalar o repositório do oVirt e suas dependências:
  ```bash
 sudo dnf install http://resources.ovirt.org/pub/yum-repo/ovirt-release44.rpm
 sudo dnf install -y python3-ovirt-engine-sdk4 gcc libxml2-devel
@@ -22,11 +30,11 @@ Para fazer o download do Certificado CA, poderemos executar o comando a seguir.
 ```bash
 openssl s_client -connect SITELOCAL.ovirt:443 -showcerts
 ```
-O segundo certificado é a CA que deverá ser copiado para dentro do novo arquivo ca.pem e salvar na raiz do projeto
+O segundo certificado é a CA que deverá ser copiado para dentro do novo arquivo **ca.pem** e salvar na raiz do projeto
 
 ### 2- Criando arquivo de environment
 
-Para criar o arquivo de Envinroment, poderemos utilizar o comando na raiz do nosso projeto.
+Para criar o arquivo de Environment, poderemos utilizar o comando na raiz do nosso projeto.
 
  ```bash
 cat <<EOF>> .env
@@ -36,7 +44,7 @@ SITE='meuservidor.local'
 FILE='relatorio.csv'
 EOF
  ```
-Deveremos modificar o valor das variáveis para adequar aos nossos valores.
+Deveremos modificar o valor das variáveis para adequar ao nosso ambiente.
 
 ### 3- Execução
 Para executar o script, deverá correr o comando
