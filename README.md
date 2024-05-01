@@ -9,14 +9,11 @@ Foi utilizada as seguintes informações como base para a coleta:
 
 **[ Nome; Processador; Memória; Sistema Operacional; Disco ]**
 
-## Requirements
-Foi utilizado o Alma Linux 8 com python3.6.
-Vamos instalar o repositório do oVirt e suas dependências
- ```bash
-sudo dnf install http://resources.ovirt.org/pub/yum-repo/ovirt-release44.rpm
-sudo dnf install -y python3-ovirt-engine-sdk4 gcc libxml2-devel
-pip3 install -r requirements.txt --user
- ```
+## Docker
+Para facilitar a a utilização e a portabilidade, criei uma imagem Docker com todo o ambiente
+necessário para esta utilização.
+Teremos os seguintes passos a seguir
+
 ### 1- Download da CA utilizada no oVirt
 Para fazer o download do Certificado CA, poderemos executar o comando a seguir.
 ```bash
@@ -39,9 +36,14 @@ EOF
 Deveremos modificar o valor das variáveis para adequar aos nossos valores.
 
 ### 3- Execução
-Para executar o script, deverá correr o comando
+Com o arquivo .env e o ca.pem criados, poderemos executar o container com o comando a seguir.
+
 ```bash
-chmod +x ovirt-rel.py
+docker run -it -v "$PWD/ca.pem:/app/relatorio_oVirt-1.0.0/ca.pem:ro" -v "$PWD/.env:/app/relatorio_oVirt-1.0.0/.env:rw" ceievfa/relatorio_ovirt:1.0
+```
+desta forma, teremos o container em execução e pronto para a execução do script. 
+
+```bash
 ./ovirt-rel.py
 ```
 
